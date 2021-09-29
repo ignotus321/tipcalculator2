@@ -1,0 +1,11 @@
+interface={{ wifi_interface }}
+
+driver={{ wifi_driver_type }}
+
+ssid={{ ssid }}
+hw_mode=g
+channel=7
+wmm_enabled=0
+macaddr_acl=0
+ignore_broadcast_ssid=0
+wpa=0

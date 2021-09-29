@@ -1,0 +1,128 @@
+# This file is part of eRCaGuy_dotfiles: https://github.com/ElectricRCAircraftGuy/eRCaGuy_dotfiles
+
+# >> THIS IS THE PRIMARY BASH CONFIGURATION FILE FOR YOU TO EDIT AND CUSTOMIZE! <<
+
+# INSTALLATION & USAGE INSTRUCTIONS:
+# - If you are pulling in my bash configuration files for your usage, I recommend you leave my
+#   ".bashrc" and ".bash_aliases" files as-is, and edit and customize this
+#   ".bash_aliases_private" file instead!
+# - See the "eRCaGuy_dotfiles/home/README.md" file, with full instructions and details, here:
+#   https://github.com/ElectricRCAircraftGuy/eRCaGuy_dotfiles/tree/master/home
+#
+# 1. Install by copying this file to your home dir, and editing your own personal copy there:
+#       cp -i .bash_aliases_private ~
+
+# Note: to remind yourself what the definition is for any given alias, just run
+# `alias some_alias_name` at the terminal. To see all aliases, run just `alias`. To see
+# ALL my custom aliases AND functions AND executable scripts, type `gs_` then press Tab Tab
+# (Tab two times).
+
+# ==================================================================================================
+# PERSONAL (PRIVATE) Bash Setup, Variables, Aliases, & Functions
+# - Add your personal, custom, or otherwise unshared bash aliases and functions here below.
+# - It is recommended to use this file for your personal or private aliases and functions rather
+#   than defining them in the "~/.bashrc" or "~/.bash_aliases" file.
+# - If you have something you think is very useful to others, add it to the "~/.bash_aliases" file
+#   and then open up a Pull Request on GitHub to ask me to merge it into the main eRCaGuy_dotfiles
+#   repo.
+# - All bash aliases or functions below will override any from the "~/.bash_aliases" file, prior
+#   to the point this "~/.bash_aliases_private" file is sourced (imported), if they have the
+#   same name.
+# ==================================================================================================
+
+# In my naming of aliases and functions, I like to precede names with my initials followed by an
+# underscore, like this: `gs_some_cmd_name`. This way, simply by typing `gs_` at the terminal and
+# then pressing Tab twice, I can quickly see a list of ALL of my available custom functions. To
+# add your own initials, one technique is to simply add an alias to my aliases, like this. Let's
+# assume your initials are "am":
+#       alias am_open_default_tabs="gs_open_default_tabs"
+#       alias am_alert="gs_alert"
+#       # etc.
+
+# Default terminal title:
+# Uncomment one of the below options, or write your own, to set a default terminal title each time
+# you open up a terminal. You can also change the current terminal title manually at any time. See
+# `gs_set_title -h` for help.
+#
+# 1. Example static titles
+# DEFAULT_TERMINAL_TITLE="my new title"
+# 2. Example dynamic titles (must use single quotes around the whole title, as shown below)
+# DEFAULT_TERMINAL_TITLE='Current Directory is "$PWD"'
+# DEFAULT_TERMINAL_TITLE='Date and time of last cmd is "$(date)"'
+
+# ------------- CONFIGURATION FOR `gs_open_default_tabs` Bash function (START) ---------------------
+# You may configure up to 10 terminal tabs to be rapidly opened whenever you run
+# `gs_open_default_tabs`. Each tab can be given a static or dynamic title, as well as a command to
+# run when the tab is opened. If you need more than 10 you will need to edit the code for the
+# function inside `.bash_aliases`.
+
+# See my answer here for additional reference:
+# https://askubuntu.com/questions/315408/open-terminal-with-multiple-tabs-and-execute-application/1026563#1026563
+
+# Uncomment the line for your desired terminal.
+TERMINAL="terminator"  # my preference since you can right-click and go to
+                       # "Split Horizontally" or "Split Vertically"
+# TERMINAL="gnome-terminal"  # the default that comes with Ubuntu 18.04, 20.04, etc.
+
+# Uncomment a tab title OR tab command below to configure this tab to open. You may configure
+# just a title, just a command, or both.
+
+# 1. Tab TITLES
+TERMINAL_TAB_TITLE_01='git'
+TERMINAL_TAB_TITLE_02='bazel'
+TERMINAL_TAB_TITLE_03='Python'
+TERMINAL_TAB_TITLE_04='ssh1'
+TERMINAL_TAB_TITLE_05='ssh2'
+TERMINAL_TAB_TITLE_06='ssh3'
+TERMINAL_TAB_TITLE_07='other'
+# TERMINAL_TAB_TITLE_08='other2'
+# TERMINAL_TAB_TITLE_09='dynamic title: last cmd time: "$(date)"'
+# TERMINAL_TAB_TITLE_10='dynamic title (change your dir) "$(pwd)"'
+
+# 2. Tab COMMANDS
+# Notes:
+#   1. You must use quotes, as shown in the examples below, around any paths with spaces in
+#      the path.
+#   2. Escape apostrophes in `echo -e` with `\x27`, as shown in the examples below. See also my
+#      detailed answer here for more examples:
+#      https://stackoverflow.com/questions/1250079/how-to-escape-single-quotes-within-single-quoted-strings/65878993#65878993
+
+TERMINAL_TAB_CMD_01="cd \"$HOME/GS/dev\""
+TERMINAL_TAB_CMD_02="cd \"$HOME/GS/dev\""
+TERMINAL_TAB_CMD_03="cd \"$HOME/GS/dev\""
+TERMINAL_TAB_CMD_04="cd \"$HOME/GS/dev\""
+TERMINAL_TAB_CMD_05="cd \"$HOME/GS/dev\"; ls"
+TERMINAL_TAB_CMD_06="cd \"$HOME/GS/dev\"; ll"
+TERMINAL_TAB_CMD_07="cd \"$HOME/GS/dev\"; ls; echo -e \"\n===== Let\x27s get ready to code! =====\n\""
+# TERMINAL_TAB_CMD_08="cd \"$HOME/temp\""
+# TERMINAL_TAB_CMD_09="cd \"$HOME/some directory with spaces\"; ls"
+# TERMINAL_TAB_CMD_10="cd \"$HOME/GS/dev\"; ls; echo -e \"\n===== Let\x27s get ready to code! =====\n\""
+
+# ------------- CONFIGURATION FOR `gs_open_default_tabs` Bash function (END) -----------------------
+
+
+# UPDATE THESE FOR YOU! See .bash_aliases for detailed notes.
+
+# alias gs_ssh="ssh -X -o \"ServerAliveInterval 60\" username@domain_name"
+# alias gs_ssh_dropbear=""
+# alias gs_sshfs=""
+# alias gs_sshfs_umount=""
+
+# See git & Linux cmds doc:
+# alias bazel_build_lldb='time bazel build --copt=-glldb --copt=-O0 --strip=never \
+# //my/target1/... //my/target2/...; gs_alert'
+# alias bazel_test_lldb='time bazel test --copt=-glldb --copt=-O0 --strip=never \
+# //my/target1/... //my/target2/...; gs_alert'
+
+# Get the size of your built executable or shared object (*.so file) and print it out.
+# Related: see also my detailed Q & A here:
+# https://electronics.stackexchange.com/questions/363931/how-do-i-find-out-at-compile-time-how-much-of-an-stm32s-flash-memory-and-dynami
+# - Note that the `echo "$ ..."` parts of the command are just to remind you where these files are
+#   located is all--as though you had just manually typed the `size` command at the command-line
+#   instead of calling this alias. There is no magic there, and `$` means nothing special in this
+#   case other than to make it look like a command you typed at the terminal.
+# alias gs_program_size='\
+# echo "$ size build/bin/path/to/my/executable1" && \
+# size build/bin/path/to/my/executable1; \
+# echo "$ size build/bin/path/to/my/executable2" && \
+# size build/bin/path/to/my/executable2'
