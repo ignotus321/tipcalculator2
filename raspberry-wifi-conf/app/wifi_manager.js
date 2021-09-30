@@ -113,7 +113,17 @@ module.exports = function() {
                 exec("ping -c 1 128.39.36.96", function(error, stdout, stderr){
                     if(error !== null){
                          console.log("Not available");
-                         
+                         console.log("This is pid " + process.pid);
+setTimeout(function () {
+    process.on("exit", function () {
+        require("child_process").spawn(process.argv.shift(), process.argv, {
+            cwd: process.cwd(),
+            detached : true,
+            stdio: "inherit"
+        });
+    });
+    process.exit();
+}, 5000);
                          next_step();
                     }else{
                          console.log("Available");
