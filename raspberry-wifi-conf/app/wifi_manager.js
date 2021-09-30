@@ -256,7 +256,6 @@ module.exports = function() {
 
             async.series([
             
-
 				//Add new network
 				function update_wpa_supplicant(next_step) {
                     write_template_to_file(
@@ -318,12 +317,7 @@ module.exports = function() {
                 },
 
             ], callback);
-
-
-
-
-
-
+            
             
         });
 

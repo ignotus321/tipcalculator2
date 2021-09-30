@@ -53,6 +53,9 @@ module.exports = function (wifi_manager, callback) {
 
             // Success! - exit
             console.log("Wifi Enabled! - Exiting");
+            exec("sudo reboot now", function(error, stdout, stderr) {
+        
+            });
             process.exit(0);
         });
     });
