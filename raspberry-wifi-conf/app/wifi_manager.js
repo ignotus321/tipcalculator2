@@ -113,11 +113,9 @@ module.exports = function() {
                 exec("ping -c 1 128.39.36.96", function(error, stdout, stderr){
                     if(error !== null){
                          console.log("Not available");
-                         
-                         exec("sudo reboot now", function(error, stdout, stderr) {
-                            if (error) console.log("reboot failed");
-                            next_step();
-                        });
+                         console.log("Not available");
+                         console.log("Not available");
+                         console.log("Not available");
                     }else{
                          console.log("Available");
                          next_step();
