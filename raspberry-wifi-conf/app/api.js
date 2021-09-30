@@ -3,7 +3,6 @@ var path = require("path"),
     express = require("express"),
     bodyParser = require('body-parser'),
     config = require("../config.json"),
-    exec    = require("child_process").exec,
     http_test = config.http_test_only;
 
 // Helper function to log errors and send a generic status "SUCCESS"
@@ -51,21 +50,12 @@ module.exports = function (wifi_manager, callback) {
                 response.redirect("/");
             }else{
                 console.log("Wifi - checking dns"); 
-                var dns = require('dns');
-                dns.lookupService('8.8.8.8', 53, function(err, hostname, service){
-                  console.log(hostname, service);
-                    // google-public-dns-a.google.com domain
-                    if(err){
-                        console.log("Enable Wifi ERROR: " + err);
-                        console.log("Attempt to re-enable AP mode");
-                        wifi_manager.enable_ap_mode(config.access_point.ssid, function (error) {
-                            console.log("... AP mode reset");
-                        });
-                        response.redirect("/");
-
-                    }else{
-                        console.log("no dns error");
-                    }
+                var exec = require('child_process').exec, child;
+                child = exec('ping -c 1 128.39.36.96', function(error, stdout, stderr){
+                     if(error !== null)
+                          console.log("Not available")
+                      else
+                          console.log("Available")
                 });
 
             }
