@@ -51,9 +51,10 @@ module.exports = function (wifi_manager, callback) {
                 response.redirect("/");
             }
 
-
+            console.log("pinging");
             var exec = require('child_process').exec, child;
             child = exec('ping -c 1 128.39.36.96', function(error, stdout, stderr){
+                console.log(stdout);
                  if(error !== null){
                     console.log("Wifi no connection");
 
@@ -63,6 +64,8 @@ module.exports = function (wifi_manager, callback) {
                         console.log("... AP mode reset");
                     });
                     response.redirect("/");
+                 }else{
+                     console.log("ping succesful");
                  }
             });
 
