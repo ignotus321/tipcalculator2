@@ -27,13 +27,12 @@ async.series([
                 if (reconfigure) {
                     console.log("\nForce reconfigure enabled - try to enable access point");
                 } else {
-
-                    
                     process.exit(0);
                 }
             } else {
                 console.log("\nWifi is not enabled, Enabling AP for self-configure");
             }
+            console.log("error");
             next_step(error);
         });
     },
