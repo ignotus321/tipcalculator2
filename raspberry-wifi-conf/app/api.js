@@ -51,16 +51,24 @@ module.exports = function (wifi_manager, callback) {
                 response.redirect("/");
             }else{
                 //doesnt work so far
-                console.log("Wifi - checking dns"); 
+                console.log("Wifi - checking wifi enabled"); 
          
-                var exec = require('child_process').exec, child;
-                child = exec('echo "hello world"', function(error, stdout, stderr){
-                     if(error !== null)
-                          console.log("Not available: " + error);
-                      else
-                          console.log("Available")
+                wifi_manager.is_wifi_enabled(function(error, result_ip) {
+			
+                    if (result_ip) {
+                        console.log("\nWifi is enabled.");
+                        var reconfigure = config.access_point.force_reconfigure || false;
+                        if (reconfigure) {
+                            console.log("\nForce reconfigure enabled - try to enable access point");
+                        } else {
+                            process.exit(0);
+                        }
+                    } else {
+                        console.log("\nWifi is not enabled, Enabling AP for self-configure");
+                    }
+                    console.log("error");
+                    next_step(error);
                 });
-
             }
 
             // Success! - exit
