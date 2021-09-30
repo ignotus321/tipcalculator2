@@ -56,7 +56,7 @@ module.exports = function (wifi_manager, callback) {
                   console.log(hostname, service);
                     // google-public-dns-a.google.com domain
                     if(err){
-                        console.log("Enable Wifi ERROR: " + error);
+                        console.log("Enable Wifi ERROR: " + err);
                         console.log("Attempt to re-enable AP mode");
                         wifi_manager.enable_ap_mode(config.access_point.ssid, function (error) {
                             console.log("... AP mode reset");
