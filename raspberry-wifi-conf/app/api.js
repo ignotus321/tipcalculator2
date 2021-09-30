@@ -1,6 +1,7 @@
 var path = require("path"),
     util = require("util"),
     express = require("express"),
+    exec    = require("child_process").exec,
     bodyParser = require('body-parser'),
     config = require("../config.json"),
     http_test = config.http_test_only;
@@ -49,11 +50,13 @@ module.exports = function (wifi_manager, callback) {
                 });
                 response.redirect("/");
             }else{
+                //doesnt work so far
                 console.log("Wifi - checking dns"); 
+         
                 var exec = require('child_process').exec, child;
-                child = exec('ping -c 1 128.39.36.96', function(error, stdout, stderr){
+                child = exec('echo "hello world"', function(error, stdout, stderr){
                      if(error !== null)
-                          console.log("Not available")
+                          console.log("Not available: " + error);
                       else
                           console.log("Available")
                 });
