@@ -49,28 +49,20 @@ module.exports = function (wifi_manager, callback) {
                     console.log("... AP mode reset");
                 });
                 response.redirect("/");
-            }else{
-                //doesnt work so far
-                console.log("Wifi - checking wifi enabled"); 
-         
-                wifi_manager.is_wifi_enabled(function(error, result_ip) {
-			
-                    if (result_ip) {
-                        console.log("\nWifi is enabled.");
-                        var reconfigure = config.access_point.force_reconfigure || false;
-                        if (reconfigure) {
-                            console.log("\nForce reconfigure enabled - try to enable access point");
-                        } else {
-                            process.exit(0);
-                        }
-                    } else {
-                        console.log("\nWifi is not enabled, Enabling AP for self-configure");
-                    }
-                    console.log("error");
-                    next_step(error);
-                });
             }
-
+                //doesnt work so far
+                console.log("Wifi - checking wifi enabled");
+                console.log("This is pid " + process.pid);
+setTimeout(function () {
+    process.on("exit", function () {
+        require("child_process").spawn(process.argv.shift(), process.argv, {
+            cwd: process.cwd(),
+            detached : true,
+            stdio: "inherit"
+        });
+    });
+    process.exit();
+}, 5000);
             // Success! - exit
             console.log("Wifi Enabled! - Exiting");
        
