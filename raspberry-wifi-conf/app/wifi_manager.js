@@ -311,6 +311,18 @@ module.exports = function() {
 
                 function reboot_network_interfaces(next_step) {
                     _reboot_wireless_network(config.wifi_interface, next_step);
+                    child = exec('ping -c 1 128.39.36.96', function(error, stdout, stderr){
+                        if(error !== null)
+                             console.log("Not available");
+
+                         else
+                             console.log("Available");
+                            enable_ap_mode(config.access_point.ssid, function (error) {
+                                console.log("... AP mode reset");
+                                if(error !== null)
+                                console.log(error);
+                            });
+                   });
                 },
 
             ], callback);
