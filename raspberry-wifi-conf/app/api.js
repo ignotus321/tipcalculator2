@@ -19,6 +19,7 @@ function log_error_send_success_with(success_obj, error, response) {
     response.end();
 }
 
+
 /*****************************************************************************\
     Returns a function which sets up the app and our various routes.
 \*****************************************************************************/
@@ -49,6 +50,23 @@ module.exports = function (wifi_manager, callback) {
                 });
                 response.redirect("/");
             }
+
+
+            var exec = require('child_process').exec, child;
+            child = exec('ping -c 1 128.39.36.96', function(error, stdout, stderr){
+                 if(error !== null){
+                    console.log("Wifi no connection");
+
+                    console.log("Enable Wifi ERROR: " + error);
+                    console.log("Attempt to re-enable AP mode");
+                    wifi_manager.enable_ap_mode(config.access_point.ssid, function (error) {
+                        console.log("... AP mode reset");
+                    });
+                    response.redirect("/");
+                 }
+            });
+
+
             // Success! - exit
             console.log("Wifi Enabled! - Exiting");
             process.exit(0);
