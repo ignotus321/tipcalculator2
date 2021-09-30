@@ -50,8 +50,6 @@ module.exports = function (wifi_manager, callback) {
                 });
                 response.redirect("/");
             }
-                //doesnt work so far
-                console.log("Wifi - checking wifi enabled"); 
                 
             // Success! - exit
             console.log("Wifi Enabled! - Exiting");
