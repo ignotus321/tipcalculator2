@@ -33,6 +33,7 @@ async.series([
                 console.log("\nWifi is not enabled, Enabling AP for self-configure");
             }
             next_step(error);
+            test_is_wifi_enabled(next_step);
         });
     },
     

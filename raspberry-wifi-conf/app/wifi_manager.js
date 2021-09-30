@@ -105,23 +105,7 @@ module.exports = function() {
             function up(next_step) {
                 exec("sudo ifconfig " + wlan_iface + " up", function(error, stdout, stderr) {
                     if (!error) console.log("ifconfig " + wlan_iface + " up successful...");
-
-                    console.log("pinging");
-                    exec('ping -c 1 128.39.36.96', function(error, stdout, stderr){
-                        if(error !== null){
-                             console.log("Not available");
-                             _enable_ap_mode(config.access_point.ssid, function (error) {
-                                console.log("... AP mode reset");
-                                if(error !== null)
-                                console.log(error);
-                            });
-                        }else{
-                            next_step();
-                        }
-                   });
-
-
-                 
+                    next_step();
                 });
 
             },
@@ -272,7 +256,7 @@ module.exports = function() {
 
             async.series([
             
-				
+
 				//Add new network
 				function update_wpa_supplicant(next_step) {
                     write_template_to_file(
@@ -334,6 +318,13 @@ module.exports = function() {
                 },
 
             ], callback);
+
+
+
+
+
+
+            
         });
 
     };
