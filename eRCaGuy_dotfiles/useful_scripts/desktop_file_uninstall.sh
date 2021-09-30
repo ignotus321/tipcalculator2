@@ -1,1 +1,0 @@
-../Desktop_launchers/desktop_file_uninstall.sh

@@ -1,7 +1,0 @@
-# pack-refs with: peeled fully-peeled sorted 
-b9558934dfd97090ec165354448be37f1fefcfab refs/remotes/origin/gabriel.staples_SYNC
-564e75c76545ebb5b7870954543bc870f321cd55 refs/remotes/origin/master
-9568ed7ca3defbb1adc9e7325d48aaa6134ab614 refs/tags/2020-02-17
-905d077e1f68ebf1b248a321787a18a71dafb7ed refs/tags/2020-02-20
-bcb0876cba42e4042f4a5ca44285ed7193c37dd8 refs/tags/2020-03-21
-c38d17280ae9e194fd8976bd49e1be2a2da4e798 refs/tags/2020-03-24
