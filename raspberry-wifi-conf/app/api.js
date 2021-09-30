@@ -49,22 +49,30 @@ module.exports = function (wifi_manager, callback) {
                     console.log("... AP mode reset");
                 });
                 response.redirect("/");
+            }else{
+                console.log("Wifi - checking dns"); 
+                var dns = require('dns');
+                dns.lookupService('8.8.8.8', 53, function(err, hostname, service){
+                  console.log(hostname, service);
+                    // google-public-dns-a.google.com domain
+                    if(err){
+                        console.log("Enable Wifi ERROR: " + error);
+                        console.log("Attempt to re-enable AP mode");
+                        wifi_manager.enable_ap_mode(config.access_point.ssid, function (error) {
+                            console.log("... AP mode reset");
+                        });
+                        response.redirect("/");
+
+                    }else{
+                        console.log("no dns error");
+                    }
+                });
+
             }
 
             // Success! - exit
             console.log("Wifi Enabled! - Exiting");
-           exec('ping -c 1 128.39.36.96', function(error, stdout, stderr){
-                if(error !== null){
-                     console.log("Not available");
-                     exec("sudo reboot now", function(error, stdout, stderr) {
-                    });
-                }else{
-                     console.log("Available");
-                }
-                console.log(stdout);
-                console.log(stderr);
-           });
-            
+       
             process.exit(0);
         });
     });
