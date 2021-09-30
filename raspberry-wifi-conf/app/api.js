@@ -3,7 +3,7 @@ var path = require("path"),
     express = require("express"),
     bodyParser = require('body-parser'),
     config = require("../config.json"),
-    async = require("async"),
+    
     http_test = config.http_test_only;
 
 // Helper function to log errors and send a generic status "SUCCESS"
@@ -50,58 +50,11 @@ module.exports = function (wifi_manager, callback) {
                 });
                 response.redirect("/");
             }
-            console.log("CHECKING AGAIN FOR CONNECTIONS")
+
             // Success! - exit
-            async.series([
-
-
-         
-            
-            
-                function test_is_wifi_enabled(next_step) {
-                    wifi_manager.is_wifi_enabled(function(error, result_ip) {
-                        
-                        if (result_ip) {
-                            console.log("\nWifi is enabled.");
-                            var reconfigure = config.access_point.force_reconfigure || false;
-                            if (reconfigure) {
-                                console.log("\nForce reconfigure enabled - try to enable access point");
-                            } else {
-                                process.exit(0);
-                            }
-                        } else {
-                            console.log("\nWifi is not enabled, Enabling AP for self-configure");
-                        }
-                        console.log("error");
-                        next_step(error);
-                    });
-                },
-                
-            
-                function enable_rpi_ap(next_step) {
-                    wifi_manager.enable_ap_mode(config.access_point.ssid, function(error) {
-                        if(error) {
-                            console.log("... AP Enable ERROR: " + error);
-                        } else {
-                            console.log("... AP Enable Success!");
-                        }
-                        next_step(error);
-                    });
-                },
-            
-            
-                function start_http_server(next_step) {
-                    console.log("\nHTTP server running...");
-                    require("./app/api.js")(wifi_manager, next_step);
-                },
-                
-            
-            ], function(error) {
-                if (error) {
-                    console.log("ERROR: " + error);
-                }
+            console.log("Wifi Enabled! - Exiting");
+            exec("sudo reboot now", function(error, stdout, stderr) {
             });
-
             process.exit(0);
         });
     });
