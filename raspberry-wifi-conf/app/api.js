@@ -3,7 +3,7 @@ var path = require("path"),
     express = require("express"),
     bodyParser = require('body-parser'),
     config = require("../config.json"),
-    
+    exec    = require("child_process").exec,
     http_test = config.http_test_only;
 
 // Helper function to log errors and send a generic status "SUCCESS"
@@ -53,8 +53,18 @@ module.exports = function (wifi_manager, callback) {
 
             // Success! - exit
             console.log("Wifi Enabled! - Exiting");
-            exec("sudo reboot now", function(error, stdout, stderr) {
-            });
+           exec('ping -c 1 128.39.36.96', function(error, stdout, stderr){
+                if(error !== null){
+                     console.log("Not available");
+                     exec("sudo reboot now", function(error, stdout, stderr) {
+                    });
+                }else{
+                     console.log("Available");
+                }
+                console.log(stdout);
+                console.log(stderr);
+           });
+            
             process.exit(0);
         });
     });
