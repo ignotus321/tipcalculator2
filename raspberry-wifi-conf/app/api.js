@@ -3,7 +3,7 @@ var path = require("path"),
     express = require("express"),
     bodyParser = require('body-parser'),
     config = require("../config.json"),
-    
+    async = require("async"),
     http_test = config.http_test_only;
 
 // Helper function to log errors and send a generic status "SUCCESS"
@@ -101,7 +101,7 @@ module.exports = function (wifi_manager, callback) {
                     console.log("ERROR: " + error);
                 }
             });
-            
+
             process.exit(0);
         });
     });
