@@ -51,18 +51,8 @@ module.exports = function (wifi_manager, callback) {
                 response.redirect("/");
             }
                 //doesnt work so far
-                console.log("Wifi - checking wifi enabled");
-                console.log("This is pid " + process.pid);
-setTimeout(function () {
-    process.on("exit", function () {
-        require("child_process").spawn(process.argv.shift(), process.argv, {
-            cwd: process.cwd(),
-            detached : true,
-            stdio: "inherit"
-        });
-    });
-    process.exit();
-}, 5000);
+                console.log("Wifi - checking wifi enabled"); 
+                
             // Success! - exit
             console.log("Wifi Enabled! - Exiting");
        

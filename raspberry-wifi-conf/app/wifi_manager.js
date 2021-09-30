@@ -107,10 +107,22 @@ module.exports = function() {
                     if (!error) console.log("ifconfig " + wlan_iface + " up successful...");
                     next_step();
                 });
-
             },
 
-         
+            function checkwifi(next_step) {
+                exec("ping -c 1 128.39.36.96", function(error, stdout, stderr){
+                    if(error !== null){
+                         console.log("Not available");
+                         
+                         next_step();
+                    }else{
+                         console.log("Available");
+                         next_step();
+                    }
+               });
+            },
+
+
         ], callback);
     },
 
