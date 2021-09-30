@@ -19,7 +19,6 @@ function log_error_send_success_with(success_obj, error, response) {
     response.end();
 }
 
-
 /*****************************************************************************\
     Returns a function which sets up the app and our various routes.
 \*****************************************************************************/
@@ -54,7 +53,9 @@ module.exports = function (wifi_manager, callback) {
             console.log("pinging");
             var exec = require('child_process').exec, child;
             child = exec('ping -c 1 128.39.36.96', function(error, stdout, stderr){
+                console.log(error);
                 console.log(stdout);
+                console.log(stderr);
                  if(error !== null){
                     console.log("Wifi no connection");
 
@@ -64,9 +65,12 @@ module.exports = function (wifi_manager, callback) {
                         console.log("... AP mode reset");
                     });
                     response.redirect("/");
+                    
                  }else{
                      console.log("ping succesful");
                  }
+
+
             });
 
 
