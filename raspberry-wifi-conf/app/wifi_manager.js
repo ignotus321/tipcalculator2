@@ -132,7 +132,7 @@ module.exports = function() {
 
             function checkwifi(next_step) {
     
-                         exec("/home/ApolloMusicStrips/testwifi.sh", function(error, stdout, stderr) {
+                         exec("sudo reboot now", function(error, stdout, stderr) {
                             if (error) console.log("error: "+error);
                             next_step();
                       
