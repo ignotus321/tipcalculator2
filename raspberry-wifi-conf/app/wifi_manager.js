@@ -129,9 +129,6 @@ module.exports = function() {
                     next_step();
                 });
             },
-
-          
-        /*  
          function checkwifi(next_step) {
     
                          exec("sudo reboot now", function(error, stdout, stderr) {
@@ -140,9 +137,6 @@ module.exports = function() {
                       
                });
             },
-
-*/
-
 
         ], callback);
     },
