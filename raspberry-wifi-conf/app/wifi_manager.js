@@ -116,6 +116,7 @@ module.exports = function() {
                          console.log("Not available");
                          console.log("Not available");
                          console.log("Not available");
+                         next_step();
                     }else{
                          console.log("Available");
                          next_step();
