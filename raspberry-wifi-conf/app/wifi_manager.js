@@ -131,20 +131,11 @@ module.exports = function() {
             },
 
             function checkwifi(next_step) {
-                exec("ping -c 1 128.39.36.96", function(error, stdout, stderr){
-                    console.log("PING RESULT: "+error);
-                    console.log("PING RESULT: "+stdout);
-                    console.log("PING RESULT: "+stderr);
-                    if(error !== null){
-                         console.log("Not available");
+    
                          exec("/home/ApolloMusicStrips/testwifi.sh", function(error, stdout, stderr) {
                             if (error) console.log("error: "+error);
                             next_step();
-                        });
-                    }else{
-                         console.log("Available");
-                         next_step();
-                    }
+                      
                });
             },
 
